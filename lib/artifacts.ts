@@ -29,11 +29,17 @@ export const frontendExamplesRegistry: Record<
     component: () => Promise<{ default: React.ComponentType }>
   }
 > = {
-  // Example:
-  // "css-flexbox": {
-  //   metadata: { slug: "css-flexbox", title: "CSS Flexbox", description: "...", tags: ["css"] },
-  //   component: () => import("@/artifacts/frontend-examples/css-flexbox"),
-  // },
+  "intersection-observer": {
+    metadata: {
+      slug: "intersection-observer",
+      title: "Intersection Observer",
+      description:
+        "Interactive demonstration of the Intersection Observer API for detecting element visibility",
+      tags: ["javascript", "api", "scroll", "performance"],
+    },
+    component: () =>
+      import("@/artifacts/frontend-examples/intersection-observer"),
+  },
 }
 
 export function getAllAlgorithms(): ArtifactMetadata[] {
