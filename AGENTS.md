@@ -61,3 +61,7 @@ Interactive demonstrations of frontend concepts, patterns, and APIs.
 
 ### Special notes
 * Framer motion now is motion and has their separated documentation.
+* This repo uses bun as package manager.
+
+### Workflow
+* After done the task, run the command `bun run build` to build the project, `bunx tsx --noEmit` and `bun run lint` to check for any errors.
