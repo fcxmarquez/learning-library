@@ -1,0 +1,51 @@
+---
+title: Git Best Practices
+description: Essential git commands and workflows for efficient version control
+tags:
+  - git
+  - version-control
+  - workflow
+---
+
+## Commit Messages
+
+Write clear, concise commit messages that explain the **why**, not just the **what**.
+
+### Format
+
+```
+<type>: <subject>
+
+<body>
+```
+
+Common types:
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `refactor`: Code restructuring
+- `test`: Adding tests
+
+## Branching Strategy
+
+Use feature branches for new work:
+
+```bash
+git checkout -b feature/add-login
+```
+
+Keep `main` clean and deployable at all times.
+
+## Useful Commands
+
+```bash
+# Interactive rebase for cleaning history
+git rebase -i HEAD~3
+
+# Stash changes temporarily
+git stash
+git stash pop
+
+# View commit history graphically
+git log --oneline --graph --all
+```

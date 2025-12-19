@@ -1,0 +1,55 @@
+---
+title: TypeScript Tips
+description: Practical TypeScript patterns and best practices for everyday development
+tags:
+  - typescript
+  - javascript
+  - types
+---
+
+## Type Inference
+
+Let TypeScript infer types when possible:
+
+```typescript
+// Good - type is inferred as string[]
+const fruits = ["apple", "banana", "orange"]
+
+// Unnecessary - explicit type annotation
+const fruits: string[] = ["apple", "banana", "orange"]
+```
+
+## Utility Types
+
+TypeScript provides built-in utility types:
+
+### Partial
+
+Makes all properties optional:
+
+```typescript
+interface User {
+  name: string
+  email: string
+}
+
+type PartialUser = Partial<User>
+// { name?: string; email?: string }
+```
+
+### Pick and Omit
+
+```typescript
+type UserName = Pick<User, "name">
+type UserWithoutEmail = Omit<User, "email">
+```
+
+## Type Guards
+
+Narrow types safely:
+
+```typescript
+function isString(value: unknown): value is string {
+  return typeof value === "string"
+}
+```
