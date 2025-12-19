@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -122,4 +123,53 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Prose styles for MDX content */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--foreground);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-pre-code: var(--foreground);
+  --tw-prose-pre-bg: var(--muted);
+}
+
+.prose pre {
+  background-color: oklch(0.18 0 0);
+  border: 1px solid oklch(1 0 0 / 10%);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.prose code {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.875em;
+}
+
+.prose :not(pre) > code {
+  background-color: oklch(0.25 0 0);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-weight: 400;
+}
+
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
 }
