@@ -3,86 +3,64 @@
 import { useState, useEffect, useRef } from "react"
 import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CodeBlock } from "@/components/ui/code-block"
 import { RotateCcw } from "lucide-react"
 
-const javascriptCode = `// Create an Intersection Observer
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Element is visible in viewport
-        entry.target.classList.add('visible');
-        console.log('Element entered viewport:', entry.target);
-        console.log('Intersection ratio:', entry.intersectionRatio);
-      } else {
-        // Element left viewport
-        entry.target.classList.remove('visible');
-      }
-    });
-  },
-  {
-    // Options
-    root: null, // Use viewport as root
-    rootMargin: '0px', // No margin around root
-    threshold: 0.5, // Trigger when 50% visible
-  }
-);
+const reactCode = `import { useState, useEffect, useRef, RefObject } from "react";
 
-// Observe elements
-const elements = document.querySelectorAll('.observe-me');
-elements.forEach((el) => observer.observe(el));
-
-// Cleanup when done
-// observer.disconnect();`
-
-const typescriptCode = `interface ObserverOptions {
+interface UseIntersectionObserverOptions {
   root?: Element | null;
   rootMargin?: string;
   threshold?: number | number[];
 }
 
-function createScrollObserver(
-  callback: (entry: IntersectionObserverEntry) => void,
-  options: ObserverOptions = {}
-): IntersectionObserver {
-  const defaultOptions: ObserverOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5,
-  };
-
-  const observer = new IntersectionObserver(
-    (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => callback(entry));
-    },
-    { ...defaultOptions, ...options }
-  );
-
-  return observer;
-}
-
-// Usage with React hook
+// Custom hook for Intersection Observer
 function useIntersectionObserver(
-  ref: React.RefObject<Element>,
-  options: ObserverOptions = {}
-): boolean {
+  ref: RefObject<Element | null>,
+  options: UseIntersectionObserverOptions = {}
+): { isIntersecting: boolean; ratio: number } {
   const [isIntersecting, setIsIntersecting] = useState(false);
+  const [ratio, setRatio] = useState(0);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    const observer = createScrollObserver(
-      (entry) => setIsIntersecting(entry.isIntersecting),
-      options
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsIntersecting(entry.isIntersecting);
+          setRatio(entry.intersectionRatio);
+        });
+      },
+      {
+        root: options.root ?? null,
+        rootMargin: options.rootMargin ?? "0px",
+        threshold: options.threshold ?? [0, 0.25, 0.5, 0.75, 1],
+      }
     );
 
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [ref, options]);
+  }, [ref, options.root, options.rootMargin, options.threshold]);
 
-  return isIntersecting;
+  return { isIntersecting, ratio };
+}
+
+// Example component using the hook
+function ObservableBox() {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const { isIntersecting, ratio } = useIntersectionObserver(boxRef, {
+    threshold: [0, 0.5, 1],
+  });
+
+  return (
+    <div
+      ref={boxRef}
+      className={\`box \${isIntersecting ? "visible" : ""}\`}
+    >
+      {isIntersecting ? \`Visible: \${Math.round(ratio * 100)}%\` : "Not visible"}
+    </div>
+  );
 }`
 
 interface BoxState {
@@ -233,19 +211,8 @@ export default function IntersectionObserverVisualization() {
       </div>
 
       <div className="border-t pt-6">
-        <h3 className="text-lg font-semibold mb-4">Code Examples</h3>
-        <Tabs defaultValue="javascript" className="w-full">
-          <TabsList className="mb-4">
-            <TabsTrigger value="javascript">JavaScript</TabsTrigger>
-            <TabsTrigger value="typescript">TypeScript</TabsTrigger>
-          </TabsList>
-          <TabsContent value="javascript">
-            <CodeBlock code={javascriptCode} language="javascript" />
-          </TabsContent>
-          <TabsContent value="typescript">
-            <CodeBlock code={typescriptCode} language="typescript" />
-          </TabsContent>
-        </Tabs>
+        <h3 className="text-lg font-semibold mb-4">Code Example</h3>
+        <CodeBlock code={reactCode} language="tsx" />
       </div>
     </div>
   )
