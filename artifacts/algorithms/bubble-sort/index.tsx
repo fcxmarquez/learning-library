@@ -3,7 +3,61 @@
 import { useState, useCallback } from "react"
 import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Play, RotateCcw, Pause } from "lucide-react"
+
+const pythonCode = `def bubble_sort(arr):
+    n = len(arr)
+
+    for i in range(n - 1):
+        # Flag to optimize if no swaps occur
+        swapped = False
+
+        for j in range(n - i - 1):
+            # Compare adjacent elements
+            if arr[j] > arr[j + 1]:
+                # Swap if out of order
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+
+        # If no swaps, array is sorted
+        if not swapped:
+            break
+
+    return arr
+
+# Example usage
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = bubble_sort(numbers)
+print(sorted_numbers)  # [11, 12, 22, 25, 34, 64, 90]`
+
+const javascriptCode = `function bubbleSort(arr) {
+  const n = arr.length;
+
+  for (let i = 0; i < n - 1; i++) {
+    // Flag to optimize if no swaps occur
+    let swapped = false;
+
+    for (let j = 0; j < n - i - 1; j++) {
+      // Compare adjacent elements
+      if (arr[j] > arr[j + 1]) {
+        // Swap if out of order
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        swapped = true;
+      }
+    }
+
+    // If no swaps, array is sorted
+    if (!swapped) break;
+  }
+
+  return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = bubbleSort(numbers);
+console.log(sortedNumbers); // [11, 12, 22, 25, 34, 64, 90]`
 
 interface ArrayBar {
   value: number
@@ -133,6 +187,26 @@ export default function BubbleSortVisualization() {
         <p>
           <strong>Time Complexity:</strong> O(n²) | <strong>Space:</strong> O(1)
         </p>
+      </div>
+
+      <div className="border-t pt-6">
+        <h3 className="text-lg font-semibold mb-4">Code Examples</h3>
+        <Tabs defaultValue="python" className="w-full">
+          <TabsList className="mb-4">
+            <TabsTrigger value="python">Python</TabsTrigger>
+            <TabsTrigger value="javascript">JavaScript</TabsTrigger>
+          </TabsList>
+          <TabsContent value="python">
+            <pre className="bg-[oklch(0.18_0_0)] border border-white/10 rounded-lg p-4 overflow-x-auto">
+              <code className="text-sm font-mono">{pythonCode}</code>
+            </pre>
+          </TabsContent>
+          <TabsContent value="javascript">
+            <pre className="bg-[oklch(0.18_0_0)] border border-white/10 rounded-lg p-4 overflow-x-auto">
+              <code className="text-sm font-mono">{javascriptCode}</code>
+            </pre>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )
