@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CodeBlock } from "@/components/ui/code-block"
 import { RotateCcw } from "lucide-react"
 
 const javascriptCode = `// Create an Intersection Observer
@@ -239,14 +240,10 @@ export default function IntersectionObserverVisualization() {
             <TabsTrigger value="typescript">TypeScript</TabsTrigger>
           </TabsList>
           <TabsContent value="javascript">
-            <pre className="bg-[oklch(0.18_0_0)] border border-white/10 rounded-lg p-4 overflow-x-auto">
-              <code className="text-sm font-mono">{javascriptCode}</code>
-            </pre>
+            <CodeBlock code={javascriptCode} language="javascript" />
           </TabsContent>
           <TabsContent value="typescript">
-            <pre className="bg-[oklch(0.18_0_0)] border border-white/10 rounded-lg p-4 overflow-x-auto">
-              <code className="text-sm font-mono">{typescriptCode}</code>
-            </pre>
+            <CodeBlock code={typescriptCode} language="typescript" />
           </TabsContent>
         </Tabs>
       </div>

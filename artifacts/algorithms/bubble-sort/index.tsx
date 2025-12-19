@@ -4,6 +4,7 @@ import { useState, useCallback } from "react"
 import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CodeBlock } from "@/components/ui/code-block"
 import { Play, RotateCcw, Pause } from "lucide-react"
 
 const pythonCode = `def bubble_sort(arr):
@@ -197,14 +198,10 @@ export default function BubbleSortVisualization() {
             <TabsTrigger value="javascript">JavaScript</TabsTrigger>
           </TabsList>
           <TabsContent value="python">
-            <pre className="bg-[oklch(0.18_0_0)] border border-white/10 rounded-lg p-4 overflow-x-auto">
-              <code className="text-sm font-mono">{pythonCode}</code>
-            </pre>
+            <CodeBlock code={pythonCode} language="python" />
           </TabsContent>
           <TabsContent value="javascript">
-            <pre className="bg-[oklch(0.18_0_0)] border border-white/10 rounded-lg p-4 overflow-x-auto">
-              <code className="text-sm font-mono">{javascriptCode}</code>
-            </pre>
+            <CodeBlock code={javascriptCode} language="javascript" />
           </TabsContent>
         </Tabs>
       </div>
