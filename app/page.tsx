@@ -26,7 +26,7 @@ export default function Home() {
               icon={<BookOpen className="h-8 w-8" />}
             />
             <SectionCard
-              title="Algorithms"
+              title="Algorithms & Data Structures"
               description="Interactive visualizations to understand algorithms and data structures. Learn through animations and hands-on exploration."
               href="/algorithms"
               icon={<Binary className="h-8 w-8" />}

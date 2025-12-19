@@ -27,7 +27,7 @@ const navItems = [
     icon: BookOpen,
   },
   {
-    title: "Algorithms",
+    title: "Algorithms & Data Structures",
     href: "/algorithms",
     icon: Binary,
   },
