@@ -19,6 +19,16 @@ export const algorithmRegistry: Record<
     },
     component: () => import("@/artifacts/algorithms/bubble-sort"),
   },
+  "merkle-tree": {
+    metadata: {
+      slug: "merkle-tree",
+      title: "Merkle Tree",
+      description:
+        "Interactive visualization of Merkle trees with tamper detection demonstration",
+      tags: ["data-structure", "cryptography", "blockchain", "hashing"],
+    },
+    component: () => import("@/artifacts/algorithms/merkle-tree"),
+  },
 }
 
 // Registry of frontend example artifacts
