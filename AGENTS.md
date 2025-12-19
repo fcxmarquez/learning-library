@@ -6,13 +6,43 @@ This repo is a collection and library of personal knowledge of different topics 
 
 ## Collections
 
-Each section opens a subsection with cards; each card has to have a title, description, and tags system. The content has to be searchable. Each of them opens an artifact, which will be described in the following points.
+Each section opens a subsection with cards. Each card has a title, description, and tags. The content is searchable and filterable by tags. Each card opens an artifact specific to its section type.
 
-- Resources: A collection of resources for different topics in software engineering, this place is like an aggregator of different resources; each one has to have tags and a system to filter them by tags or search by keywords. Once opened, is like a documentation page, with the content displayed.
+There are three types of artifacts:
 
-- Algorithms and data structures—it's a place where each algorithm or data structure is explained by using an artifact, which is interactable software with animations and visualizations. It has to include code examples too in down of the interaction area in Python and JavaScript. All the  related code has to be inside that section/directory. They are like independent artifacts. Add all the controls needed to interact with and improve the learning experience.
+### 1. Resources (Read-only artifacts)
 
-- Frontend: A collection of frontend exercises and examples, like the algorithms section; the code related has to be inside that section/directory and also is an interactive artifact. Add all the controls needed to interact with and improve the learning experience. It has to include code examples too in down of the interaction area in React and TypeScript.
+Documentation-style content for learning concepts. These are **not interactive software**, just well-structured text content.
+
+**Structure:**
+- Clear explanations written for easy learning
+- Examples and diagrams when helpful
+- Code snippets with syntax highlighting when needed
+- Stored as MDX files in `content/resources/`
+
+**Purpose:** Aggregator of knowledge, references, best practices, and curated information.
+
+### 2. Algorithms & Data Structures (Interactive artifacts)
+
+Interactive visualizations with animations to understand how algorithms work.
+
+**Structure (three parts):**
+1. **Interactive area** - Visualization with controls (play, pause, reset, speed, step-by-step, etc.). Don't spare on controls to improve the learning experience.
+2. **Description** - Explanation of the algorithm, time/space complexity, and related information.
+3. **Code examples** - Implementation in **Python** and **JavaScript** with syntax highlighting.
+
+**Location:** Each artifact is self-contained in `artifacts/algorithms/[name]/`
+
+### 3. Frontend Examples (Interactive artifacts)
+
+Interactive demonstrations of frontend concepts, patterns, and APIs.
+
+**Structure (three parts):**
+1. **Interactive area** - Live demonstration with controls to experiment and learn. Don't spare on controls to improve the learning experience.
+2. **Description** - Explanation of the concept, use cases, and related information.
+3. **Code examples** - Implementation in **React (TypeScript)** and **CSS** when needed, with syntax highlighting.
+
+**Location:** Each artifact is self-contained in `artifacts/frontend-examples/[name]/`
 
 ## Code Rules
 
